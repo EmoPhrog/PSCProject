@@ -4,22 +4,6 @@ A responsive and interactive car rental platform that allows users to browse ava
 
 ---
 
-## 📂 Project Structure
-
-├── index.html # Homepage with car listings and search bar
-├── login.php # PHP login script with simple authentication
-├── dashboard.php # (Optional) Redirect page after successful login
-├── style.css # Main stylesheet for the website
-├── script.js # JavaScript for search, currency change, and UI features
-├── assets/
-│ ├── images/ # Car and UI images
-│ ├── flags/ # Flag icons for currency dropdown
-│ └── css/ # Extra CSS (if any)
-└── README.md # Project documentation
-
-
----
-
 ## ✨ Features
 
 - **User Login**
@@ -45,8 +29,6 @@ A responsive and interactive car rental platform that allows users to browse ava
 - **CSS3**
 - **JavaScript (Vanilla JS)**
 - **PHP** (for login system)
-- **Font Awesome** (icons)
-- **Flag Icons** (for currency selector)
 
 ---
 
