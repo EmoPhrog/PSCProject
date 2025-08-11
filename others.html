@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cardex - Lifestyle Rentals</title>
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+</head>
+<body>
+  <header class="header" data-header>
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img src="./assets/images/Logo_2.png" alt="Cardex logo">
+      </a>
+      
+      <nav class="navbar" data-navbar>
+        <ul class="navbar-list">
+
+          <li>
+            <a href="#hero" class="navbar-link" data-nav-link>Home</a>
+          </li>
+
+          <li>
+            <a href="#section featured-car" class="navbar-link" data-nav-link>Explore cars</a>
+          </li>
+
+          <li>
+            <a href="#section testimonials" class="navbar-link" data-nav-link>About us</a>
+          </li>
+
+          <li>
+            <a href="#footer-bottom" class="navbar-link" data-nav-link>Blog</a>
+          </li>
+
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="login.html" class="btn user-btn">Login</a>
+        <a href="signup.html" class="btn">Sign Up</a>
+        <button class="nav-toggle-btn" data-nav-toggle-btn>
+          <span class="one"></span>
+          <span class="two"></span>
+          <span class="three"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="section category-tabs">
+      <div class="container">
+        <h2 class="h2 section-title">Lifestyle Rentals</h2>
+        <div class="tab-buttons">
+          <button class="tab-btn active" data-tab="bikes">Bikes & Scooters</button>
+          <button class="tab-btn" data-tab="gaming">Gaming Gear</button>
+          <button class="tab-btn" data-tab="apparel">Premium Apparel</button>
+          <button class="tab-btn" data-tab="electronics">Electronics</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bikes Section -->
+    <section id="bikes" class="section rental-section active-tab">
+      <div class="container">
+        <h3 class="h3 section-subtitle">Two-Wheel Adventures</h3>
+        <div class="rental-grid">
+          <!-- Bike Card 1 -->
+          <div class="rental-card">
+            <figure class="card-banner">
+              <img src="./assets/images/mountain-bike.jpg" alt="Mountain Bike">
+            </figure>
+            <div class="card-content">
+              <h4 class="h4 card-title">Specialized Mountain Bike</h4>
+              <ul class="card-list">
+                <li><i class="fas fa-calendar-alt"></i> Min. 1 week rental</li>
+                <li><i class="fas fa-cog"></i> 21-speed</li>
+              </ul>
+              <div class="card-price-wrapper">
+                <p class="card-price"><strong>$75</strong> / week</p>
+                <button class="btn">Rent Now</button>
+              </div>
+            </div>
+          </div>
+          <!-- More bike cards -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Gaming Section -->
+    <section id="gaming" class="section rental-section">
+      <div class="container">
+        <h3 class="h3 section-subtitle">Gaming Gear</h3>
+        <div class="rental-grid">
+          <!-- Gaming Card 1 -->
+          <div class="rental-card">
+            <figure class="card-banner">
+              <img src="./assets/images/ps5-bundle.jpg" alt="PS5 Bundle">
+            </figure>
+            <div class="card-content">
+              <h4 class="h4 card-title">PS5 + 5 Games</h4>
+              <ul class="card-list">
+                <li><i class="fas fa-gamepad"></i> Controller included</li>
+                <li><i class="fas fa-tv"></i> 4K/120Hz</li>
+              </ul>
+              <div class="card-price-wrapper">
+                <p class="card-price"><strong>$120</strong> / month</p>
+                <button class="btn">Rent Now</button>
+              </div>
+            </div>
+          </div>
+          <!-- More gaming cards -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Apparel Section -->
+    <section id="apparel" class="section rental-section">
+      <div class="container">
+        <h3 class="h3 section-subtitle">Premium Apparel</h3>
+        <div class="rental-grid">
+          <!-- Apparel Card 1 -->
+          <div class="rental-card">
+            <figure class="card-banner">
+              <img src="./assets/images/designer-suit.jpg" alt="Designer Suit">
+            </figure>
+            <div class="card-content">
+              <h4 class="h4 card-title">Designer Suit Set</h4>
+              <ul class="card-list">
+                <li><i class="fas fa-tshirt"></i> Tailored fit</li>
+                <li><i class="fas fa-clock"></i> 7-day rental</li>
+              </ul>
+              <div class="card-price-wrapper">
+                <p class="card-price"><strong>$150</strong> / event</p>
+                <button class="btn">Rent Now</button>
+              </div>
+            </div>
+          </div>
+          <!-- More apparel cards -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Electronics Section -->
+    <section id="electronics" class="section rental-section">
+      <div class="container">
+        <h3 class="h3 section-subtitle">Premium Electronics</h3>
+        <div class="rental-grid">
+          <!-- Electronics Card 1 -->
+          <div class="rental-card">
+            <figure class="card-banner">
+              <img src="./assets/images/drone.jpg" alt="DJI Drone">
+            </figure>
+            <div class="card-content">
+              <h4 class="h4 card-title">DJI Mavic 3 Drone</h4>
+              <ul class="card-list">
+                <li><i class="fas fa-camera"></i> 4K Camera</li>
+                <li><i class="fas fa-battery-full"></i> 2 batteries</li>
+              </ul>
+              <div class="card-price-wrapper">
+                <p class="card-price"><strong>$200</strong> / weekend</p>
+                <button class="btn">Rent Now</button>
+              </div>
+            </div>
+          </div>
+          <!-- More electronics cards -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">Ridex</a>
+          <p class="footer-text">
+            Your premium rental solution for vehicles and lifestyle products since 2018.
+          </p>
+        </div>
+
+        <ul class="footer-list">
+          <li><p class="footer-list-title">Company</p></li>
+          <li><a href="about.html" class="footer-link">About Us</a></li>
+          <li><a href="careers.html" class="footer-link">Careers</a></li>
+          <li><a href="blog.html" class="footer-link">Blog</a></li>
+        </ul>
+
+        <ul class="footer-list">
+          <li><p class="footer-list-title">Support</p></li>
+          <li><a href="contact.html" class="footer-link">Contact Us</a></li>
+          <li><a href="faq.html" class="footer-link">FAQs</a></li>
+          <li><a href="insurance.html" class="footer-link">Insurance</a></li>
+        </ul>
+
+        <ul class="footer-list">
+          <li><p class="footer-list-title">Legal</p></li>
+          <li><a href="terms.html" class="footer-link">Terms</a></li>
+          <li><a href="privacy.html" class="footer-link">Privacy</a></li>
+          <li><a href="cookie.html" class="footer-link">Cookie Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-bottom">
+        <ul class="social-list">
+          <li><a href="#" class="social-link"><i class="fab fa-facebook"></i></a></li>
+          <li><a href="#" class="social-link"><i class="fab fa-twitter"></i></a></li>
+          <li><a href="#" class="social-link"><i class="fab fa-instagram"></i></a></li>
+        </ul>
+        <p class="copyright">&copy; 2025 Ridex. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Tab functionality
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabSections = document.querySelectorAll('.rental-section');
+    
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remove active class from all
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabSections.forEach(s => s.classList.remove('active-tab'));
+        
+        // Add active class to clicked
+        btn.classList.add('active');
+        const tabId = btn.getAttribute('data-tab');
+        document.getElementById(tabId).classList.add('active-tab');
+      });
+    });
+  </script>
+</body>
+</html>
