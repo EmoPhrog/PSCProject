@@ -18,8 +18,6 @@ A responsive and interactive car rental platform that allows users to browse ava
 - **Search Bar**
   - Search cars by name
   - Includes a search icon inside the input box
-- **Responsive Design**
-  - Works on desktop, tablet, and mobile
 
 ---
 
@@ -39,8 +37,8 @@ A responsive and interactive car rental platform that allows users to browse ava
    git clone https://github.com/yourusername/car-rental-website.git
    cd car-rental-website
 2. **Move to a local PHP server**
-    If you’re using XAMPP, place the files inside htdocs
-    Start Apache server in XAMPP
+    Place the files inside htdocs
+    Start Apache server and MySQL in XAMPP
 3. **Access the website**
     Open your browser and go to:
     /localhost/car_rental
