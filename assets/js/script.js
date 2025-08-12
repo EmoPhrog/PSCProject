@@ -1,0 +1,363 @@
+'use strict';
+
+/* ================================
+   1. NAVBAR TOGGLE & OVERLAY
+================================ */
+const overlay = document.querySelector("[data-overlay]");
+const navbar = document.querySelector("[data-navbar]");
+const navToggleBtn = document.querySelector("[data-nav-toggle-btn]");
+const navbarLinks = document.querySelectorAll("[data-nav-link]");
+
+function toggleNavbar() {
+  navToggleBtn?.classList.toggle("active");
+  navbar?.classList.toggle("active");
+  overlay?.classList.toggle("active");
+}
+
+if (navToggleBtn && navbar && overlay) {
+  navToggleBtn.addEventListener("click", toggleNavbar);
+  overlay.addEventListener("click", toggleNavbar);
+  navbarLinks.forEach(link => link.addEventListener("click", toggleNavbar));
+}
+
+
+
+/* ================================
+   2. HEADER ACTIVE ON SCROLL
+================================ */
+const header = document.querySelector("[data-header]");
+if (header) {
+  window.addEventListener("scroll", () => {
+    header.classList.toggle("active", window.scrollY >= 10);
+  });
+}
+
+
+
+/* ================================
+   3. RENT NOW BUTTON CHECK
+================================ */
+const rentButtons = document.querySelectorAll('.rent-btn');
+if (rentButtons.length) {
+  rentButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!localStorage.getItem('loggedInUser')) {
+        window.location.href = 'login.html';
+      } else {
+        alert('Proceeding to booking page...');
+      }
+    });
+  });
+}
+
+
+
+/* ================================
+   4. LIFESTYLE RENTALS TABS
+================================ */
+const tabBtns = document.querySelectorAll('.tab-btn');
+const tabSections = document.querySelectorAll('.rental-section');
+
+if (tabBtns.length && tabSections.length) {
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabSections.forEach(s => s.classList.remove('active-tab'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab)?.classList.add('active-tab');
+    });
+  });
+}
+
+
+
+/* ================================
+   5. VEHICLE FILTERS
+================================ */
+const typeFilter = document.getElementById('vehicleTypeFilter');
+const priceFilter = document.getElementById('priceFilter');
+const carCards = document.querySelectorAll('.featured-car-card');
+
+if ((typeFilter || priceFilter) && carCards.length) {
+  function filterCars() {
+    const typeVal = typeFilter?.value || 'all';
+    const priceVal = priceFilter?.value || 'all';
+
+    carCards.forEach(card => {
+      const matchesType = typeVal === 'all' || card.dataset.type === typeVal;
+      const matchesPrice = priceVal === 'all' || card.dataset.price === priceVal;
+      card.style.display = (matchesType && matchesPrice) ? '' : 'none';
+    });
+    if (document.getElementById('pageInfo')) updatePagination();
+  }
+
+  typeFilter?.addEventListener('change', filterCars);
+  priceFilter?.addEventListener('change', filterCars);
+}
+
+
+
+/* ================================
+   6. PAGINATION (Safe Version)
+================================ */
+let currentPage = 1;
+const carsPerPage = 6;
+
+function updatePagination() {
+  const visibleCars = Array.from(carCards).filter(c => c.style.display !== 'none');
+  const totalPages = Math.ceil(visibleCars.length / carsPerPage);
+
+  visibleCars.forEach((card, index) => {
+    card.style.display = (index >= (currentPage - 1) * carsPerPage && index < currentPage * carsPerPage) ? '' : 'none';
+  });
+
+  const pageInfo = document.getElementById('pageInfo');
+  if (pageInfo) pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+}
+
+if (document.getElementById('pageInfo')) {
+  updatePagination();
+
+  document.getElementById('prevPage')?.addEventListener('click', () => {
+    if (currentPage > 1) {
+      currentPage--;
+      updatePagination();
+    }
+  });
+
+  document.getElementById('nextPage')?.addEventListener('click', () => {
+    const visibleCars = Array.from(carCards).filter(c => c.style.display !== 'none');
+    if (currentPage < Math.ceil(visibleCars.length / carsPerPage)) {
+      currentPage++;
+      updatePagination();
+    }
+  });
+}
+
+
+
+/* ================================
+   7. PASSWORD TOGGLE (Login/Signup)
+================================ */
+const passwordToggles = document.querySelectorAll('.password-toggle');
+if (passwordToggles.length) {
+  passwordToggles.forEach(toggle => {
+    toggle.addEventListener('click', () => {
+      const input = toggle.previousElementSibling;
+      if (!input) return;
+      const type = input.type === 'password' ? 'text' : 'password';
+      input.type = type;
+      toggle.innerHTML = type === 'password'
+        ? '<i class="fas fa-eye"></i>'
+        : '<i class="fas fa-eye-slash"></i>';
+    });
+  });
+}
+
+
+
+/* ================================
+   8. SIGNUP/LOGIN SIMULATION
+================================ */
+const signupForm = document.getElementById('signup-form');
+if (signupForm) {
+  signupForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const email = document.getElementById('signup-email')?.value;
+    const password = document.getElementById('signup-password')?.value;
+    if (email && password) {
+      localStorage.setItem('loggedInUser', JSON.stringify({ email, password }));
+      alert('Account created! You are now logged in.');
+      window.location.href = 'index.php';
+    }
+  });
+}
+
+const loginForm = document.getElementById('login-form');
+if (loginForm) {
+  loginForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const email = document.getElementById('email')?.value;
+    const password = document.getElementById('password')?.value;
+    const user = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+
+    if (user.email === email && user.password === password) {
+      alert('Login successful!');
+      window.location.href = 'index.php';
+    } else {
+      alert('Invalid credentials!');
+    }
+  });
+}
+
+const slider = document.querySelector('.featured-car-list');
+let isDown = false;
+let startX;
+let scrollLeft;
+
+slider.addEventListener('mousedown', (e) => {
+  isDown = true;
+  slider.classList.add('active');
+  startX = e.pageX - slider.offsetLeft;
+  scrollLeft = slider.scrollLeft;
+});
+slider.addEventListener('mouseleave', () => {
+  isDown = false;
+  slider.classList.remove('active');
+});
+slider.addEventListener('mouseup', () => {
+  isDown = false;
+  slider.classList.remove('active');
+});
+slider.addEventListener('mousemove', (e) => {
+  if(!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - slider.offsetLeft;
+  const walk = (x - startX) * 2; // scroll speed
+  slider.scrollLeft = scrollLeft - walk;
+});
+
+function toggleMenu() {
+    var menu = document.getElementById("dropdownMenu");
+    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+}
+
+document.querySelectorAll('.password-toggle').forEach(toggle => {
+  toggle.addEventListener('click', () => {
+    const input = toggle.previousElementSibling;  // the password input
+    if (input.type === 'password') {
+      input.type = 'text';
+      toggle.innerHTML = '<i class="fas fa-eye-slash"></i>';
+    } else {
+      input.type = 'password';
+      toggle.innerHTML = '<i class="fas fa-eye"></i>';
+    }
+  });
+});
+
+document.querySelectorAll('.password-toggle').forEach(toggle => {
+  toggle.addEventListener('click', () => {
+      // Find the input inside the same input-wrapper
+      const wrapper = toggle.closest('.input-wrapper');
+      const input = wrapper.querySelector('input.input-field');
+    
+      if (input.type === 'password') {
+      input.type = 'text';
+      toggle.innerHTML = '<i class="fas fa-eye-slash"></i>';
+      } else {
+      input.type = 'password';
+      toggle.innerHTML = '<i class="fas fa-eye"></i>';
+      }
+  });
+});
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const profileIcon = document.getElementById('profileIcon');
+    const profileDropdown = document.getElementById('profileDropdown');
+
+    if (profileIcon) {
+      profileIcon.addEventListener('click', () => {
+        if (profileDropdown.style.display === 'none' || profileDropdown.style.display === '') {
+          profileDropdown.style.display = 'block';
+        } else {
+          profileDropdown.style.display = 'none';
+        }
+      });
+
+      // Close dropdown if clicking outside
+      document.addEventListener('click', (e) => {
+        if (!profileIcon.contains(e.target) && !profileDropdown.contains(e.target)) {
+          profileDropdown.style.display = 'none';
+        }
+      });
+    }
+  });
+
+  const dropdown = document.querySelector('.currency-dropdown');
+  const selected = dropdown.querySelector('.currency-selected');
+  const list = dropdown.querySelector('.currency-list');
+  const prices = document.querySelectorAll('.price');
+
+  // Toggle dropdown
+  selected.addEventListener('click', () => {
+    list.style.display = list.style.display === 'block' ? 'none' : 'block';
+  });
+
+  // Change currency
+  list.querySelectorAll('div').forEach(option => {
+    option.addEventListener('click', () => {
+      const currency = option.dataset.value;
+      selected.innerHTML = option.innerHTML; // Update selected
+      selected.dataset.value = currency;
+      list.style.display = 'none';
+      
+      // Price conversion
+      prices.forEach(priceElement => {
+        let basePrice = parseFloat(priceElement.dataset.price);
+        if (currency === 'MYR') {
+          priceElement.textContent = 'RM' + basePrice.toFixed(2) + ' /month';
+        } else if (currency === 'IDR') {
+          let converted = basePrice * 3500;
+          priceElement.textContent = 'Rp' + converted.toLocaleString() + ' /month';
+        } else if (currency === 'SGD') {
+          let converted = basePrice * 0.29;
+          priceElement.textContent = 'S$' + converted.toFixed(2) + ' /month';
+        }
+      });
+    });
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!dropdown.contains(e.target)) {
+      list.style.display = 'none';
+    }
+  });
+
+document.getElementById('searchForm').addEventListener('submit', function(e) {
+  e.preventDefault(); // Prevent form submission
+
+  const modelInput = document.getElementById('carModel').value.toLowerCase().trim();
+  const maxPaymentInput = document.getElementById('maxPayment').value.trim();
+  const makeYearInput = document.getElementById('makeYear').value.trim();
+
+  // Get all car cards
+  const cars = document.querySelectorAll('.featured-car-card');
+
+  cars.forEach(car => {
+    const title = car.querySelector('.card-title').textContent.toLowerCase();
+    const yearText = car.querySelector('.year').textContent;
+    const priceText = car.querySelector('.price').dataset.price; // e.g. "439"
+
+    // Parse values
+    const minYear = parseInt(makeYearInput) || 0;
+    const maxPrice = parseInt(maxPaymentInput) || Infinity;
+
+    // Extract year range (e.g. "2020-2024")
+    let [startYear, endYear] = yearText.split('-').map(y => parseInt(y));
+    if (!endYear) endYear = startYear;
+
+    const price = parseInt(priceText);
+
+    // Check if matches inputs
+    const matchesModel = title.includes(modelInput);
+    const matchesYear = endYear >= minYear; // If car model year range includes minYear
+    const matchesPrice = price <= maxPrice;
+
+    if (matchesModel && matchesYear && matchesPrice) {
+      car.parentElement.style.display = ''; // show li item
+    } else {
+      car.parentElement.style.display = 'none'; // hide li item
+    }
+  });
+});
+
+document.getElementById('resetBtn').addEventListener('click', function() {
+  document.getElementById('carModel').value = '';
+  document.getElementById('maxPayment').value = '';
+  document.getElementById('makeYear').value = '';
+
+  document.querySelectorAll('.featured-car-list li').forEach(li => {
+    li.style.display = '';
+  });
+});
