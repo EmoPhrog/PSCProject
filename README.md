@@ -18,6 +18,10 @@ A responsive and interactive car rental platform that allows users to browse ava
 - **Search Bar**
   - Search cars by name
   - Includes a search icon inside the input box
+- **Admin Page**
+  - Username: admin
+  - Password: admin123
+  - Admin page for managing listings and site content
 
 ---
 
