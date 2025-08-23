@@ -34,15 +34,66 @@ A responsive and interactive car rental platform that allows users to browse ava
 
 ---
 
-## 💻 Installation & Setup
+## Setup & Installation (Localhost with PHP)
+If you want to use the **Sign In / Sign Up** features, you must run the project on a PHP server.
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/car-rental-website.git
-   cd car-rental-website
-2. **Move to a local PHP server**
-    Place the files inside htdocs
-    Start Apache server and MySQL in XAMPP
-3. **Access the website**
-    Open your browser and go to:
-    /localhost/car_rental
+### Requirements
+- [XAMPP](https://www.apachefriends.org/index.html)
+- PHP 7.4 or above
+- MySQL Database
+- A web browser
+
+### Steps
+1. **Install XAMPP**  
+   - Download and install the tools above.
+   - Rename it from **"PSCProject-main"** to **"car_rental"**
+
+2. **Move the Project to Server Folder**  
+   - Move the `car_rental` folder to `htdocs`.  
+     Example:  
+     ```
+     C:\xampp\htdocs\car_rental
+     ```
+
+3. **Start Server**
+   - Open XAMPP
+   - Start **Apache**.
+   - Start **MySQL**.
+
+4. **Create Database**
+   - Go to:
+     ```
+     http://localhost/phpmyadmin
+     ```
+   - Create **database**:
+     ```
+     Create user and payment_system database
+     ```
+   - Click **Import** and Press **Choose File** for both database:
+     ```
+     Choose user.sql and payment_system.sql
+     ```
+
+5. **Access the Site**
+   - Open:
+     ```
+     localhost/car_rental
+     ```
+
+6. **Updating Database Connection**
+   - In `login.php` and `register.php`, set:
+     ```php
+     $host = "localhost";
+     $user = "root";
+     $pass = "";
+     $db   = "user";;
+     ```
+   - In `payment.php`, set:
+     ```php
+     $host = "localhost";
+     $user = "root";
+     $pass = "";
+     $db   = "payment_system";;
+     ```
+
+---
